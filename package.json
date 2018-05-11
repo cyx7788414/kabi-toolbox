@@ -1,0 +1,23 @@
+{
+  "name": "kabi-toolbox",
+  "version": "1.0.0",
+  "description": "kabi's node toolbox",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyx7788414/node-toolbox.git"
+  },
+  "keywords": [
+    "node",
+    "toolbox"
+  ],
+  "author": "kabi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyx7788414/node-toolbox/issues"
+  },
+  "homepage": "https://github.com/cyx7788414/node-toolbox#readme"
+}
