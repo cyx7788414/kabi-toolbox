@@ -79,7 +79,7 @@ var startServer = function(conf) {
     
     var proxyList = getProxyList(conf);
     var serverInstance = http.createServer(function(request, response) {
-        var requestPath = '.' + path.normalize(request.url);
+        var requestPath = '.' + path.normalize(request.url.split('?')[0]);
         routeHandler(requestPath, request, response, proxyList);
     }).listen(port, function(error) {
         if (error) {
@@ -89,12 +89,11 @@ var startServer = function(conf) {
             console.log('Server started on port ' + port);
         }
     });
-}
+};
 
 var server = {
     start: function(confFile) {
         confFile = (confFile !== true)?confFile:'./.kabi.json';
-        console.log(confFile);
         var confPath = path.resolve(process.cwd(), confFile);
         fs.readFile(confPath, 'utf8', function(error, data) {
             if (error) {
