@@ -93,7 +93,7 @@ var startServer = function(conf) {
 
 var server = {
     start: function(confFile) {
-        confFile = (confFile !== true)?confFile:'./kabi.json';
+        confFile = (confFile !== true)?confFile:'./.kabi.json';
         console.log(confFile);
         var confPath = path.resolve(process.cwd(), confFile);
         fs.readFile(confPath, 'utf8', function(error, data) {
