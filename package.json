@@ -2,7 +2,6 @@
   "name": "kabi-toolbox",
   "version": "1.0.0",
   "description": "kabi's node toolbox",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/cyx7788414/node-toolbox/issues"
   },
-  "homepage": "https://github.com/cyx7788414/node-toolbox#readme"
+  "homepage": "https://github.com/cyx7788414/node-toolbox#readme",
+  "bin": {
+    "kabi": "bin/kabi.js"
+  },
+  "dependencies": {
+    "commander": "^2.15.1",
+    "http-proxy": "^1.17.0",
+    "mime": "^2.3.1",
+    "node-sass": "^4.9.0"
+  }
 }

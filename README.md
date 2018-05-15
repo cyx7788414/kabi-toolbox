@@ -1,2 +1,3 @@
 my node toolbox  
-empty
+-c --compile compile scss to current path  
+-s --server start server
