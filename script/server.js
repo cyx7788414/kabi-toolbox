@@ -13,6 +13,30 @@ var respondFile = function(requestPath, request, response) {
     readStream.pipe(response);
 };
 
+var checkFile = function(requestPath, request, response) {
+    fs.stat(requestPath, function(error, stat) {
+        if (!error) {
+            if (stat.isDirectory()) {
+                var newPath = request.url + '/';
+                response.writeHead(301, {
+                    'Location': newPath,
+                    'Content-Type': 'text/html'
+                });
+                response.end(`Redirecting to <a href='${newPath}'>${newPath}</a>`);
+                console.log('REDIRECT TO : ' + newPath);
+            } else {
+                respondFile(requestPath, request, response);
+            }           
+        } else {
+            console.log('\nNO FILE ERROR: \n' + 'url: ' + request.url + '\nrequestPath: ' + requestPath + '\n');
+            response.writeHead(404, {
+                'Content-Type': 'text/html'
+            });
+            response.end(`<h1>Not Found</h1><p>The requested URL ${request.url} was not found on this server.</p>`);
+        }
+    });
+};
+
 var routeHandler = function(requestPath, request, response, proxyList) {
     if (proxyList && proxyList.length > 0) {
         var proxyFlag = false;
@@ -40,17 +64,18 @@ var routeHandler = function(requestPath, request, response, proxyList) {
     if (requestPath[requestPath.length - 1] === '/') {
         requestPath += 'index.html';
     }
-    fs.stat(requestPath, function(error, stsat) {
-        if (!error) {
-            respondFile(requestPath, request, response);
-        } else {
-            console.log('\nNO FILE ERROR: \n' + 'url: ' + request.url + '\nrequestPath: ' + requestPath + '\n');
-            response.writeHead(404, {
-                'Content-Type': 'text/html'
-            });
-            response.end(`<h1>Not Found</h1><p>The requested URL ${request.url} was not found on this server.</p>`);
-        }
-    });
+    checkFile(requestPath, request, response);
+//    fs.stat(requestPath, function(error, stsat) {
+//        if (!error) {
+//            respondFile(requestPath, request, response);
+//        } else {
+//            console.log('\nNO FILE ERROR: \n' + 'url: ' + request.url + '\nrequestPath: ' + requestPath + '\n');
+//            response.writeHead(404, {
+//                'Content-Type': 'text/html'
+//            });
+//            response.end(`<h1>Not Found</h1><p>The requested URL ${request.url} was not found on this server.</p>`);
+//        }
+//    });
 };
 
 var getProxyList = function(conf) {
