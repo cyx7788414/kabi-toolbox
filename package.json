@@ -25,6 +25,8 @@
   "dependencies": {
     "commander": "^2.15.1",
     "http-proxy": "^1.17.0",
+    "markdown-it": "^8.4.1",
+    "markdown-it-highlightjs": "^3.0.0",
     "mime": "^2.3.1",
     "node-sass": "^4.9.0"
   }
